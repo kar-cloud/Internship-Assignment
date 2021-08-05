@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 import axios from "axios";
 
 export default function Tab2() {
@@ -49,36 +50,42 @@ export default function Tab2() {
   }
 
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Mobile</th>
-          <th>Email</th>
-          <th>Address</th>
-        </tr>
-      </thead>
-      <tbody>
-        {userData.map((user, index) => {
-          return (
-            <tr key={index}>
-              <td>{user.username}</td>
-              <td>{user.mobile}</td>
-              <td>{user.email}</td>
-              <td>{user.address}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    handleDelete(user, index);
-                  }}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </Table>
+    <>
+      <h1 className="tableHeading">Users</h1>
+      <Table className="tableStructure" bordered hover>
+        <thead className="tableStructureHeading">
+          <tr>
+            <th>Username</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userData.map((user, index) => {
+            return (
+              <tr key={index} className="tableStructureRow">
+                <td>{user.username}</td>
+                <td>{user.mobile}</td>
+                <td>{user.email}</td>
+                <td>{user.address}</td>
+                <td>
+                  <Button
+                    // id="tableStructureButton"
+                    onClick={() => {
+                      handleDelete(user, index);
+                    }}
+                    variant="danger"
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </>
   );
 }

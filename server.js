@@ -136,7 +136,7 @@ app.post("/users/add", verifyToken, async (req, res) => {
       return res.json({ error: "Enter all the required fields" });
     }
 
-    const validUsername = /^[a-zA-Z0-9]*$/;
+    const validUsername = /^[a-zA-Z0-9_@./#&+-]*$/;
     const validMobile = /^\d{10}$/;
     const validEmail =
       /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(.[a-zA-z])?$/;

@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+.tableHeading {
+  font-size: 3.5rem;
+  font-weight: 200;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tableStructure {
+  width: 70%;
+  margin: auto;
+  border: 1.8px solid black;
+}
+
+.tableStructureHeading {
+  font-size: 1.3rem;
+  background-color: aliceblue;
+  text-align: center;
+  font-weight: 500;
+}
+
+.tableStructureRow {
+  font-size: 1.2rem;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+}
+
+.tableStructureButton {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (max-device-width: 600px) {
+  .tableHeading {
+    font-size: 3rem;
+  }
+}

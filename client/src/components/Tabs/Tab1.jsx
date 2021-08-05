@@ -7,7 +7,7 @@ export default function Tab1() {
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
 
-  const validUsername = /^[a-zA-Z0-9]*$/;
+  const validUsername = /^[a-zA-Z0-9_@./#&+-]*$/;
   const validMobile = /^\d{10}$/;
   const validEmail =
     /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(.[a-zA-z])?$/;
@@ -54,20 +54,15 @@ export default function Tab1() {
 
   return (
     <div className="loginContainer">
-      <div className="container">
-        <div className="row" id="loginUpperRow">
-          <h1 className="loginHeading">User Form</h1>
-        </div>
-      </div>
+      <h1 className="tableHeading">User Form</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="username">
+        <div className="registrationForm">
+          <label className="registrationLabel" htmlFor="username">
             Username
           </label>
           <input
             type="text"
-            className="form-control"
-            id="loginInputUsername"
+            className="loginInput"
             name="username"
             autoComplete="off"
             onChange={(event) => {
@@ -75,61 +70,53 @@ export default function Tab1() {
             }}
             required
           />
-        </div>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="number">
+          <label className="registrationLabel" htmlFor="number">
             Mobile Number
           </label>
           <div>
             <input
               type="number"
-              className="form-control"
+              className="loginInput"
               name="number"
-              id="loginInputNumber"
               onChange={(event) => {
                 setMobile(event.target.value);
               }}
               required
             />
           </div>
-        </div>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="email">
+          <label className="registrationLabel" htmlFor="email">
             Email
           </label>
           <div>
             <input
               type="email"
-              className="form-control"
               name="email"
-              id="loginInputEmail"
+              className="loginInput"
               onChange={(event) => {
                 setEmail(event.target.value);
               }}
               required
             />
           </div>
-        </div>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="address">
+          <label className="registrationLabel" htmlFor="address">
             Address
           </label>
           <div>
             <input
               type="text"
-              className="form-control"
               name="address"
-              id="loginInputAddress"
+              className="loginInput"
               onChange={(event) => {
                 setAddress(event.target.value);
               }}
               required
             />
           </div>
+
+          <button className="registrationContinueButton" type="submit">
+            Submit
+          </button>
         </div>
-        <button className="loginButtons" type="submit">
-          Submit
-        </button>
       </form>
     </div>
   );

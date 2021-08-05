@@ -26,55 +26,45 @@ function Login(props) {
         }
       })
       .catch((err) => {
-        console.log(err);
-        console.log("Internal Server Error");
+        alert("Internal Server Error");
       });
   }
 
   return (
-    <div className="loginContainer">
-      <div className="container">
-        <div className="row" id="loginUpperRow">
-          <h1 className="loginHeading">Login</h1>
-        </div>
-      </div>
+    <div>
+      <h1 className="loginHeading">Login</h1>
       <form onSubmit={handleLogin}>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="email">
+        <div className="registrationForm">
+          <label className="registrationLabel" htmlFor="emailAddress">
             Email
           </label>
           <input
-            type="text"
-            className="form-control"
-            id="loginInputUsername"
-            name="email"
+            id="emailAddress"
+            className="loginInput"
+            placeholder="Email"
             autoComplete="off"
             onChange={(event) => {
               setEmail(event.target.value);
             }}
             required
           />
-        </div>
-        <div className="form-group loginInputContainer">
-          <label className="loginLabels" htmlFor="password">
+          <label className="registrationLabel" htmlFor="password">
             Password
           </label>
-          <div>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              id="loginInputPassword"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              required
-            />
-          </div>
+          <input
+            id="password"
+            type="password"
+            className="loginInput"
+            placeholder="Password"
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+            required
+          />
+          <button className="registrationContinueButton" type="submit">
+            <p>LOGIN</p>
+          </button>
         </div>
-        <button className="loginButtons" type="submit">
-          Login
-        </button>
       </form>
     </div>
   );

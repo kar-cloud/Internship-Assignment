@@ -6,7 +6,7 @@ import Tab2 from "./Tabs/Tab2";
 export default function Home() {
   const [activeKey, setActiveKey] = useState("Tab1");
   return (
-    <div id="chatRoomBody">
+    <div>
       <Tab.Container
         id="controlled-tab-example"
         activeKey={activeKey}
@@ -44,7 +44,6 @@ export default function Home() {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link
-              className="privateNavbar"
               eventKey="Tab2"
               style={
                 activeKey === "Tab2"
