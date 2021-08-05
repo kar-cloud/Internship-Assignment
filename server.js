@@ -13,8 +13,18 @@ app.use(express.json()); // to recognize incoming request as JSON format
 app.use(express.static("public")); // to include the static files in public folder
 app.use(cookieParser());
 
+// URL for MongoDB hosted database
+const MONGODB_URI =
+  "mongodb+srv://" +
+  process.env.MONGODB_USERNAME +
+  ":" +
+  process.env.MONGODB_PASSWORD +
+  "@users.zclyq.mongodb.net/" +
+  process.env.MONGODB_DATABASE +
+  "?retryWrites=true&w=majority";
+
 // connecting with a database
-mongoose.connect("mongodb://localhost:27017/userInternship", {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -31,16 +41,7 @@ const userSchema = new mongoose.Schema({
   users: [mongoose.Schema.Types.Mixed],
 });
 
-// schema for user data
-const dataSchema = new mongoose.Schema({
-  username: String,
-  mobile: Number,
-  email: String,
-  address: String,
-});
-
 const User = new mongoose.model("User", userSchema);
-const Data = new mongoose.model("Data", dataSchema);
 
 // Middleware to verify Auth token
 function verifyToken(req, res, next) {
@@ -65,6 +66,7 @@ app.post("/user/auth/login", async (req, res) => {
     return res.json({ auth: false, error: "Enter all the required fields" });
   }
 
+  // code to register data in database
   // const newUser = new User({
   //   email: email,
   //   password: password,
@@ -101,11 +103,11 @@ app.post("/user/auth/login", async (req, res) => {
   res
     .cookie("token", token, {
       httpOnly: true,
-      expires: new Date(Date.now() + 30000000000),
+      expires: new Date(Date.now() + 300000),
     })
     .cookie("username", foundUser.email, {
       httpOnly: true,
-      expires: new Date(Date.now() + 30000000000),
+      expires: new Date(Date.now() + 300000),
     })
     .json({ auth: true })
     .send();
