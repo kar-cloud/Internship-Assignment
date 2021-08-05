@@ -1,6 +1,5 @@
 import axios from "axios";
-import { React, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { React, useState } from "react";
 
 function Login(props) {
   const [email, setEmail] = useState();
