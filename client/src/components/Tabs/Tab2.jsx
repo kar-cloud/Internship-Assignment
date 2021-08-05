@@ -11,7 +11,6 @@ export default function Tab2() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.data.users);
         setUserData(response.data.users);
       })
       .catch((error) => {
@@ -19,14 +18,20 @@ export default function Tab2() {
       });
   }, []);
 
-  function handleDelete(user) {
+  function handleDelete(user, recievedIndex) {
     const userProfile = {
       username: user.username,
       mobile: user.mobile,
       email: user.email,
       address: user.address,
     };
-    console.log(userProfile);
+
+    setUserData(
+      userData.filter((user, index) => {
+        return index !== recievedIndex;
+      })
+    );
+
     axios
       .post("http://localhost:8080/user/data/delete", userProfile, {
         withCredentials: true,
@@ -64,7 +69,7 @@ export default function Tab2() {
               <td>
                 <button
                   onClick={() => {
-                    handleDelete(user);
+                    handleDelete(user, index);
                   }}
                 >
                   Delete

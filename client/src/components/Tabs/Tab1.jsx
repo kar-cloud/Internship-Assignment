@@ -7,34 +7,49 @@ export default function Tab1() {
   const [email, setEmail] = useState();
   const [address, setAddress] = useState();
 
+  const validUsername = /^[a-zA-Z0-9]*$/;
+  const validMobile = /^\d{10}$/;
+  const validEmail =
+    /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(.[a-zA-z])?$/;
+
   function handleSubmit(event) {
     event.preventDefault();
-    const userFormData = {
-      username: username,
-      mobile: mobile,
-      email: email,
-      address: address,
-    };
+    if (!username.match(validUsername)) {
+      alert(
+        "Username should contain only alphanumeric characters and no spaces"
+      );
+    } else if (!mobile.match(validMobile)) {
+      alert("Mobile Number should be of 10 digits");
+    } else if (!email.match(validEmail)) {
+      alert("Please enter a valid Email");
+    } else {
+      const userFormData = {
+        username: username,
+        mobile: mobile,
+        email: email,
+        address: address,
+      };
 
-    // sending user data
-    axios
-      .post("http://localhost:8080/users/add", userFormData, {
-        withCredentials: true,
-        credentials: "include",
-      })
-      .then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        }
-        if (response.data.success) {
-          alert(response.data.success);
-          window.location.reload();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log("Internal Server Error");
-      });
+      // sending user data
+      axios
+        .post("http://localhost:8080/users/add", userFormData, {
+          withCredentials: true,
+          credentials: "include",
+        })
+        .then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          }
+          if (response.data.success) {
+            alert(response.data.success);
+            window.location.reload();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log("Internal Server Error");
+        });
+    }
   }
 
   return (

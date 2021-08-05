@@ -130,24 +130,41 @@ app.post("/users/add", verifyToken, async (req, res) => {
     const email = req.body.email;
     const address = req.body.address;
 
+    console.log(req.body);
     // checking if all fields are filled
     if (!username || !mobile || !email || !address) {
       return res.json({ error: "Enter all the required fields" });
     }
 
-    await User.updateOne(
-      { email: req.username },
-      {
-        $push: {
-          users: {
-            username: username,
-            mobile: mobile,
-            email: email,
-            address: address,
+    const validUsername = /^[a-zA-Z0-9]*$/;
+    const validMobile = /^\d{10}$/;
+    const validEmail =
+      /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+(.[a-zA-z])?$/;
+
+    if (!username.match(validUsername)) {
+      return res.json({
+        error:
+          "Username should contain only alphanumeric characters and no spaces",
+      });
+    } else if (!mobile.match(validMobile)) {
+      return res.json({ error: "Mobile Number should be of 10 digits" });
+    } else if (!email.match(validEmail)) {
+      return res.json({ error: "Please enter a valid Email" });
+    } else {
+      await User.updateOne(
+        { email: req.username },
+        {
+          $push: {
+            users: {
+              username: username,
+              mobile: mobile,
+              email: email,
+              address: address,
+            },
           },
-        },
-      }
-    );
+        }
+      );
+    }
 
     // saving user to database collection
     // const newUser = new Data({
