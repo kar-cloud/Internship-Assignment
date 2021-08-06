@@ -13,18 +13,8 @@ app.use(express.json()); // to recognize incoming request as JSON format
 app.use(express.static("public")); // to include the static files in public folder
 app.use(cookieParser());
 
-// URL for MongoDB hosted database
-const MONGODB_URI =
-  "mongodb+srv://" +
-  process.env.MONGODB_USERNAME +
-  ":" +
-  process.env.MONGODB_PASSWORD +
-  "@users.zclyq.mongodb.net/" +
-  process.env.MONGODB_DATABASE +
-  "?retryWrites=true&w=majority";
-
 // connecting with a database
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -238,6 +228,10 @@ app.post("/user/data/delete", verifyToken, async (req, res) => {
     );
   }
 });
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+}
 
 app.listen(PORT, () => {
   console.log("Server is running on port 8080 !!");
