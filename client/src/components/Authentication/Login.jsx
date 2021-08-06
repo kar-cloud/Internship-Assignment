@@ -5,6 +5,8 @@ function Login(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const baseURL = "https://userintern.com:" + process.env.PORT;
+
   async function handleLogin(event) {
     event.preventDefault();
     const userLoginData = {
@@ -13,7 +15,7 @@ function Login(props) {
     };
     // sending login data
     axios
-      .post("http://localhost:8080/user/auth/login", userLoginData, {
+      .post(baseURL + "/user/auth/login", userLoginData, {
         withCredentials: true,
         credentials: "include",
       })

@@ -7,9 +7,11 @@ import axios from "axios";
 function App() {
   const [auth, setAuth] = useState(false);
 
+  const baseURL = "https://userintern.com:" + process.env.PORT;
+
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user/auth/check/login", {
+      .get(baseURL + "/user/auth/check/login", {
         withCredentials: true,
       })
       .then((response) => {

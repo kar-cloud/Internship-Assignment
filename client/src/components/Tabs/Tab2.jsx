@@ -6,9 +6,11 @@ import axios from "axios";
 export default function Tab2() {
   const [userData, setUserData] = useState([]);
 
+  const baseURL = "https://userintern.com:" + process.env.PORT;
+
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user/data", {
+      .get(baseURL + "/user/data", {
         withCredentials: true,
       })
       .then((response) => {
@@ -34,7 +36,7 @@ export default function Tab2() {
     );
 
     axios
-      .post("http://localhost:8080/user/data/delete", userProfile, {
+      .post(baseURL + "/user/data/delete", userProfile, {
         withCredentials: true,
         credentials: "include",
       })
