@@ -14,13 +14,7 @@ export default function Home() {
           setActiveKey(key);
         }}
       >
-        <Nav
-          variant="tabs"
-          style={{
-            borderBottom: "1px solid black",
-            backgroundColor: "#556052",
-          }}
-        >
+        <Nav variant="tabs" className="Projectnavbar" style={{}}>
           <Nav.Item>
             <Nav.Link
               style={
