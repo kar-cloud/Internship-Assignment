@@ -5,7 +5,7 @@ function Login(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const baseURL = "https://userintern.com:" + process.env.PORT;
+  const baseURL = "https://userintern.com";
 
   async function handleLogin(event) {
     event.preventDefault();
