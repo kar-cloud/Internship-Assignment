@@ -7,8 +7,7 @@ import axios from "axios";
 function App() {
   const [auth, setAuth] = useState(false);
 
-  const baseURL = "https://userintern.herokuapp.com/";
-
+  const baseURL = "https://userintern.herokuapp.com/:" + process.env.PORT;
   useEffect(() => {
     axios
       .get(baseURL + "/user/auth/check/login", {
