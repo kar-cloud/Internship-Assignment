@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-export default function Tab2() {
+export default function Tab2(props) {
   const [userData, setUserData] = useState([]);
 
   const baseURL = "https://userintern.herokuapp.com";
@@ -14,10 +14,15 @@ export default function Tab2() {
         withCredentials: true,
       })
       .then((response) => {
-        setUserData(response.data.users);
+        if (response.data.auth === false) {
+          props.loggedOut();
+          window.location.reload();
+        } else {
+          setUserData(response.data.users);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Internal Server Error");
       });
   }, []);
 
@@ -29,11 +34,25 @@ export default function Tab2() {
       address: user.address,
     };
 
-    setUserData(
-      userData.filter((user, index) => {
-        return index !== recievedIndex;
+    axios
+      .get(baseURL + "/user/data", {
+        withCredentials: true,
       })
-    );
+      .then((response) => {
+        if (response.data.auth === false) {
+          props.loggedOut();
+          window.location.reload();
+        } else {
+          setUserData(
+            userData.filter((user, index) => {
+              return index !== recievedIndex;
+            })
+          );
+        }
+      })
+      .catch((error) => {
+        console.log("Internal Server Error");
+      });
 
     axios
       .post(baseURL + "/user/data/delete", userProfile, {
@@ -41,12 +60,15 @@ export default function Tab2() {
         credentials: "include",
       })
       .then((response) => {
+        if (response.data.auth === false) {
+          props.loggedOut();
+          window.location.reload();
+        }
         if (response.data.error) {
           alert(response.data.error);
         }
       })
       .catch((err) => {
-        console.log(err);
         console.log("Internal Server Error");
       });
   }
