@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Tab2() {
   const [userData, setUserData] = useState([]);
 
-  const baseURL = "https://userintern.herokuapp.com/:" + process.env.PORT;
+  const baseURL = "https://userintern.herokuapp.com";
 
   useEffect(() => {
     axios
