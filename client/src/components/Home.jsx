@@ -3,7 +3,7 @@ import { Nav, Tab } from "react-bootstrap";
 import Tab1 from "./Tabs/Tab1";
 import Tab2 from "./Tabs/Tab2";
 
-export default function Home(props.) {
+export default function Home(props) {
   const [activeKey, setActiveKey] = useState("Tab1");
   return (
     <div>
