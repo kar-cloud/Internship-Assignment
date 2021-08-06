@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import axios from "axios";
 
-export default function Tab1() {
+export default function Tab1(props) {
   const [username, setUsername] = useState();
   const [mobile, setMobile] = useState();
   const [email, setEmail] = useState();
@@ -39,6 +39,10 @@ export default function Tab1() {
           credentials: "include",
         })
         .then((response) => {
+          if (response.data.auth === false) {
+            props.loggedOut();
+            window.location.reload();
+          }
           if (response.data.error) {
             alert(response.data.error);
           }

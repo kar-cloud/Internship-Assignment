@@ -28,6 +28,10 @@ function App() {
     setAuth(true);
   }
 
+  function loggedOut() {
+    setAuth(false);
+  }
+
   return (
     <div>
       <BrowserRouter>
@@ -36,7 +40,7 @@ function App() {
             {auth ? <Redirect to="/home" /> : <Login loggedIn={loggedIn} />}
           </Route>
           <Route path="/home">
-            {!auth ? <Redirect to="/login" /> : <Home />}
+            {!auth ? <Redirect to="/login" /> : <Home loggedOut={loggedOut} />}
           </Route>
           <Route path="/">
             {auth ? <Redirect to="/home" /> : <Redirect to="/login" />}

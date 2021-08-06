@@ -3,7 +3,7 @@ import { Nav, Tab } from "react-bootstrap";
 import Tab1 from "./Tabs/Tab1";
 import Tab2 from "./Tabs/Tab2";
 
-export default function Home() {
+export default function Home(props.) {
   const [activeKey, setActiveKey] = useState("Tab1");
   return (
     <div>
@@ -60,10 +60,10 @@ export default function Home() {
         </Nav>
         <Tab.Content>
           <Tab.Pane eventKey="Tab1">
-            <Tab1 />
+            <Tab1 loggedOut={props.loggedOut} />
           </Tab.Pane>
           <Tab.Pane eventKey="Tab2">
-            <Tab2 />
+            <Tab2 loggedOut={props.loggedOut} />
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>

@@ -38,18 +38,6 @@
   background-color: #556052;
 }
 
-@media (max-device-width: 710px) {
-  .Projectnavbar {
-    width: 130vw;
-  }
-}
-
-@media (max-device-width: 500px) {
-  .Projectnavbar {
-    width: 150vw;
-  }
-}
-
 @media (max-device-width: 600px) {
   .tableHeading {
     font-size: 3rem;
